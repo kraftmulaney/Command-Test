@@ -24,6 +24,7 @@ public class Robot extends TimedRobot {
   private VerifyJoysticks m_verifyJoysticks;
   private SendableChooser<String> m_chooser;
   private LedLights m_ledLights;
+  private Alert m_alert;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -73,6 +74,10 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    // $TODO
+    m_alert = new Alert("MyGroup", "Test Alert", Alert.AlertType.WARNING);
+    m_alert.set(true);
+
     m_ledLights.resetLeds();
 
     CommandScheduler.getInstance().cancelAll();
