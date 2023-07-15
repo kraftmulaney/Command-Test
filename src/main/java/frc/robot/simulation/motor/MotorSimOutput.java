@@ -1,6 +1,5 @@
 package frc.robot.simulation.motor;
 
-import com.revrobotics.RelativeEncoder;
 import frc.robot.simulation.framework.SimOutputInterface;
 import frc.robot.subsystems.RelativeEncoderSim;
 
@@ -11,16 +10,22 @@ public class MotorSimOutput implements SimOutputInterface<Double> {
   private final RelativeEncoderSim m_encoderRealWrapper;
 
   /**
-   * Constructor.
+   * Constructor. Note that the wrapper object (RelativeEncoderSim) is passed in,
+   * not the real object. This is because the simulation never writes to the
+   * real object (RelativeEncoder).
    */
-  MotorSimOutput(RelativeEncoder encoderReal) {
-    if (encoderReal == null) {
-      throw new IllegalArgumentException("encoderReal cannot be null");
+  MotorSimOutput(RelativeEncoderSim encoderRealWrapper) {
+    if (encoderRealWrapper == null) {
+      throw new IllegalArgumentException("encoderRealWrapper cannot be null");
     }
 
-    // Create a "sim" wrapper of the Robots real encoder. The sim wrapper
-    // is later used to write to the real encoder
-    m_encoderRealWrapper = new RelativeEncoderSim(encoderReal);
+    m_encoderRealWrapper = encoderRealWrapper;
+    /*
+     * $TODO
+     * // Create a "sim" wrapper of the Robots real encoder. The sim wrapper
+     * // is later used to write to the real encoder
+     * m_encoderRealWrapper = new RelativeEncoderSim(encoderReal);
+     */
   }
 
   @Override
