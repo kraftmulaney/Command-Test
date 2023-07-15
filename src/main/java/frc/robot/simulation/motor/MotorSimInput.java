@@ -12,7 +12,7 @@ public class MotorSimInput implements SimInputInterface<Double> {
   /**
    * Constructor.
    */
-  MotorSimInput(CANSparkMax motorReal) {
+  public MotorSimInput(CANSparkMax motorReal) {
     if (motorReal == null) {
       throw new IllegalArgumentException("motorReal cannot be null");
     }

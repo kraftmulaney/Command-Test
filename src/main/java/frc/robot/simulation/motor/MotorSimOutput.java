@@ -14,7 +14,7 @@ public class MotorSimOutput implements SimOutputInterface<Double> {
    * not the real object. This is because the simulation never writes to the
    * real object (RelativeEncoder).
    */
-  MotorSimOutput(RelativeEncoderSim encoderRealWrapper) {
+  public MotorSimOutput(RelativeEncoderSim encoderRealWrapper) {
     if (encoderRealWrapper == null) {
       throw new IllegalArgumentException("encoderRealWrapper cannot be null");
     }

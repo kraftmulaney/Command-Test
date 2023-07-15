@@ -3,7 +3,7 @@ package frc.robot.simulation.motor;
 import frc.robot.simulation.framework.SimManagerBase;
 
 /**
- * Simulation manager for a simple motor.
+ * Simulation manager for a simple motor, AND an encoder that reads that motor position.
  */
 public class MotorSimManager extends SimManagerBase<Double, Double> {
   private final MotorSimModel m_model;
