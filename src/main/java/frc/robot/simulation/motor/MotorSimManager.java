@@ -1,15 +1,11 @@
 package frc.robot.simulation.motor;
 
-import frc.robot.simulation.framework.SimInputInterface;
-import frc.robot.simulation.framework.SimManagerInterface;
-import frc.robot.simulation.framework.SimOutputInterface;
+import frc.robot.simulation.framework.SimManagerBase;
 
 /**
  * Simulation manager for a simple motor.
  */
-public class MotorSimManager implements SimManagerInterface<Double, Double> {
-  private SimInputInterface<Double> m_inputHandler = null;
-  private SimOutputInterface<Double> m_outputHandler = null;
+public class MotorSimManager extends SimManagerBase<Double, Double> {
   private final MotorSimModel m_model;
 
   /**
@@ -20,23 +16,17 @@ public class MotorSimManager implements SimManagerInterface<Double, Double> {
   }
 
   @Override
-  public void setInputHandler(SimInputInterface<Double> inputHandler) {
-    m_inputHandler = inputHandler;
-  }
+  protected void doSimulation() {
+    // No need to call super, since it's abstract class and doesn't
+    // implement doSimulation()
 
-  @Override
-  public void setOutputHandler(SimOutputInterface<Double> outputHandler) {
-    m_outputHandler = outputHandler;
-  }
+    // Step 1: Get the input from the input handler
+    double motorPowerPercentage = m_inputHandler.getInput();
 
-  @Override
-  public void simulationPeriodic() {
-    // When Robot is disabled, the entire simulation freezes
-    if (isRobotEnabled() && m_inputHandler != null && m_outputHandler != null) {
+    // Step 2: Run the simulation for 20ms
+    double newEncoderPosition = m_model.updateMotorPosition(motorPowerPercentage);
 
-      double motorPowerPercentage = m_inputHandler.getInput();
-      double newEncoderPosition = m_model.updateMotorPosition(motorPowerPercentage);
-      m_outputHandler.setOutput(newEncoderPosition);
-    }
+    // Step 3: Write the output to the output handler
+    m_outputHandler.setOutput(newEncoderPosition);
   }
 }
