@@ -1,13 +1,13 @@
 package frc.robot.simulation.motor;
 
 import com.revrobotics.RelativeEncoder;
-import frc.robot.simulation.framework.SimOutputDoubleInterface;
+import frc.robot.simulation.framework.SimOutputInterface;
 import frc.robot.subsystems.RelativeEncoderSim;
 
 /**
  * Helper class to implement OutputDoubleInterface.
  */
-public class MotorSimOutput implements SimOutputDoubleInterface {
+public class MotorSimOutput implements SimOutputInterface<Double> {
   private final RelativeEncoderSim m_encoderRealWrapper;
 
   /**
