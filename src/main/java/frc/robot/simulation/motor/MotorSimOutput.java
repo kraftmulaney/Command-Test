@@ -14,6 +14,10 @@ public class MotorSimOutput implements SimOutputInterface<Double> {
    * Constructor.
    */
   MotorSimOutput(RelativeEncoder encoderReal) {
+    if (encoderReal == null) {
+      throw new IllegalArgumentException("encoderReal cannot be null");
+    }
+
     // Create a "sim" wrapper of the Robots real encoder. The sim wrapper
     // is later used to write to the real encoder
     m_encoderRealWrapper = new RelativeEncoderSim(encoderReal);
